@@ -1,0 +1,83 @@
+# CLAUDE.md
+
+> 최종 업데이트: {{DATE}}
+
+이 문서는 Claude Code로 작업할 때 공통으로 유의·협의해야 할 내용을 정리한 가이드다.
+{{PROJECT_OVERVIEW}}
+
+<!-- IF 협업+서버: 서버 솔루션 위치·프로토콜 미러링 등 저장소 구성 요약을 여기에 1~2문장 추가 -->
+
+---
+
+## 환경
+
+| 항목 | 내용 |
+|------|------|
+| Unity 버전 | {{UNITY_VERSION}} |
+| 렌더 파이프라인 | {{RENDER_PIPELINE}} |
+<!-- IF 서버: 서버 런타임 / 직렬화 / DB 등 서버 스택 행 추가 -->
+
+---
+
+## 폴더 구조
+
+<!-- 프로젝트 유형에 맞게 표를 조정한다.
+     1인 개발: 담당 열 없이 경로/내용만. 스크립트 루트는 `Assets/Scripts/`.
+     협업: 아래처럼 담당 열 포함. 스크립트 루트는 `Assets/Scripts_Client/`.
+     프로젝트가 이미 다른 구조를 쓰면 실제 경로를 적고, 표준과 다르다는 점을 아래에 명시한다. -->
+
+| 경로 | 담당 | 내용 |
+|------|------|------|
+| `Assets/Scripts_Client/` | 클라이언트 | 클라이언트 코드 (스크립트 루트). 1인 개발이면 `Assets/Scripts/` |
+| `Assets/Scripts_Client/Common/Attribute/` | 클라이언트 | 범용 런타임 어트리뷰트 (마스터 `templates/code/` 에서 설치됨) |
+| `Assets/Scripts_Client/Common/Editor/` | 클라이언트 | 범용 에디터 전용 코드 — 드로어·툴 (빌드 제외) |
+| `Assets/Scripts_Client/Common/Service/` | 클라이언트 | 서비스 로케이터 (`Services` · `MonoService`) |
+| `Assets/Scripts_Client/Common/Extensions/` | 클라이언트 | 범용 확장 메서드 (`MonoBehaviourExtensions` 등) |
+| `Assets/Scripts_Client/<기능>/Contracts/` | 클라이언트 | 그 기능이 정의한 역할 인터페이스 (계약 전용 최상위 폴더는 두지 않는다) |
+| `Assets/Scenes/` | 공용 | 씬 파일 |
+<!-- IF 서버: Server/, Assets/Scripts/(Network·Protocol 미러) 행 추가 -->
+
+---
+
+## 협업 규칙
+
+<!-- 1인 개발이면 이 섹션 제목을 "작업 규칙"으로 바꾸고 협업 항목은 제외한다. -->
+
+- 각자 자기 담당 폴더만 수정한다. 상대 폴더 변경은 합의 후.
+- 커밋은 `commit-convention` 규칙을 따른다.
+- Unity에서 새 스크립트·에셋을 만들면 에디터를 갱신해 `.meta`를 생성한 뒤 원본과 함께 커밋한다.
+  `.meta` 누락 시 GUID·참조 충돌이 발생할 수 있다.
+- `.claude/settings.local.json`은 개인 설정이라 커밋하지 않는다(`.gitignore` 처리됨).
+- 코드는 한글 주석을 사용한다.
+- CLAUDE.md·스킬 문서를 수정하면 문서 상단의 `최종 업데이트` 날짜를 그날 날짜로 갱신한다.
+
+---
+
+## Skills 참조
+
+스킬은 항상 적용하는 게 아니라, **작업 내용에 따라 필요한 경우에만** 참고한다.
+작업하는 폴더에 맞춰 해당 그룹과 **공용** 스킬을 함께 본다.
+(클라이언트 작업 = 공용 + 클라이언트 / 서버 작업 = 공용 + 서버)
+
+### 공용 (`common/`) — 모든 작업
+
+| 스킬 | 경로 | 내용 |
+|------|------|------|
+| `commit-convention` | [`.claude/skills/common/commit-convention/SKILL.md`](.claude/skills/common/commit-convention/SKILL.md) | Git 커밋 메시지 규칙 |
+
+### 클라이언트 (`client/`) — `Assets/Scripts_Client` 작업 시
+
+| 스킬 | 경로 | 내용 |
+|------|------|------|
+| `clean-code-style` | [`.claude/skills/client/clean-code-style/SKILL.md`](.claude/skills/client/clean-code-style/SKILL.md) | Unity/C# 클린 코드 스타일 규칙 |
+| `feature-design` | [`.claude/skills/client/feature-design/SKILL.md`](.claude/skills/client/feature-design/SKILL.md) | OOP·SOLID·디자인 패턴 기반 기능 설계 |
+| `optimization` | [`.claude/skills/client/optimization/SKILL.md`](.claude/skills/client/optimization/SKILL.md) | 성능 최적화 판단 및 적용 가이드 |
+| `unity-handoff` | [`.claude/skills/client/unity-handoff/SKILL.md`](.claude/skills/client/unity-handoff/SKILL.md) | 유니티 에디터 작업 핸드오프 프롬프트 생성 |
+
+### 서버 (`server/`) — 서버 코드 작업 시
+
+| 스킬 | 경로 | 내용 |
+|------|------|------|
+| (없음) | — | 필요 시 서버 담당이 추가 |
+
+<!-- IF 서버 없음: 서버 섹션 전체 삭제 -->
