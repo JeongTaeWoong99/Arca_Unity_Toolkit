@@ -2,7 +2,19 @@ using UnityEngine;
 
 // 자기 자신을 역할 타입 T로 Services에 자동 등록/해제하는 MonoBehaviour 베이스.
 // 매니저/시스템/컨트롤러의 'X.Inst + Awake{Inst=this}' 보일러플레이트를 통일한다.
-// 주의: Awake에서는 다른 서비스를 Get 하지 않는다(모든 Awake 등록 완료 후 Start에서 사용).
+//
+// ⚠️ 조회는 반드시 Start에서 한다 — Awake·OnEnable 둘 다 안 된다.
+//    Unity는 씬을 열 때 오브젝트마다 Awake → OnEnable 을 이어서 부른다. 모든 Awake가 먼저
+//    끝나는 것이 아니므로, OnEnable 시점엔 다른 서비스가 아직 등록 전일 수 있다.
+//    "모든 Awake가 끝났음"이 보장되는 첫 시점은 Start다.
+//    어기면 Services.Get이 KeyNotFoundException을 던지고, 캐시 필드가 null로 남아
+//    한참 뒤 사용 지점에서 NullReferenceException으로 다시 터진다.
+//
+//    구독을 OnEnable/OnDisable에 두고 싶다면 조회만 Start로 분리한다:
+//      Start    → Get + 최초 구독
+//      OnEnable → 캐시가 있을 때만 재구독 (껐다 켜는 경로)
+//      OnDisable→ 구독 해제
+//    (Start와 OnEnable이 모두 구독을 시도하므로 중복 구독 플래그로 막는다)
 //
 // ─────────── T에 무엇을 넣는가 ───────────
 // T는 "이 객체를 무엇으로 찾을 것인가"를 정하는 키다. Services가 typeof(T)를 키로 쓰기 때문에,
