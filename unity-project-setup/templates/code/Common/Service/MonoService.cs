@@ -21,8 +21,8 @@ using UnityEngine;
 // 여기 적은 타입으로만 꺼낼 수 있다. 두 가지 쓰임을 모두 허용한다.
 //
 //   1) 자기 자신으로 등록 — 교체할 일 없는 매니저. 싱글톤 대체 용도.
-//        class SessionManager : MonoService<SessionManager>
-//        → Services.Get<SessionManager>()
+//        class XxxManager : MonoService<XxxManager>
+//        → Services.Get<XxxManager>()
 //
 //   2) 역할 인터페이스로 등록 — 구현을 갈아끼울 수 있는 AI·시스템.
 //        class Person : MonoService<IWalk>     // Person이 IWalk를 구현
