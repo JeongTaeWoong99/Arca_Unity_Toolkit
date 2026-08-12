@@ -1,6 +1,6 @@
 # 범용 코드 자산 (마스터 원본)
 
-> 최종 업데이트: 2026-08-10 (HierarchyStyler 추가)
+> 최종 업데이트: 2026-08-12 (nullable 전제 명시 · RequireRef 사용 규칙 위치 표기)
 
 어떤 유니티 프로젝트에도 그대로 복사해 쓰는 범용 C# 코드의 단일 진실.
 `/unity-project-setup` 이 프로젝트 유형에 맞는 위치로 복사한다.
@@ -46,7 +46,7 @@
 |------|------|------|------|
 | CenterHeader | `Common/Attribute/CenterHeaderAttribute.cs` | `Common/Editor/CenterHeaderDrawer.cs` | 인스펙터 섹션을 가운데 정렬 헤더로 구분 |
 | ServiceLocator | `Common/Service/Services.cs` + `Common/Service/MonoService.cs` | — | 역할↔구현 등록/조회. 하드 싱글톤(`X.Inst`) 대체 — 사용 규칙은 `feature-design` 참조 |
-| MonoBehaviourExtensions | `Common/Extensions/MonoBehaviourExtensions.cs` | — | MonoBehaviour 확장 메서드. 필수 인스펙터 참조 검증(`RequireRef`, fail-fast) 등 |
+| MonoBehaviourExtensions | `Common/Extensions/MonoBehaviourExtensions.cs` | — | MonoBehaviour 확장 메서드. 필수 인스펙터 참조 검증(`RequireRef`, fail-fast) 등 — **사용 규칙은 `skills/client/clean-code-style/SKILL.md` 9장** |
 | HierarchyStyler | — | `Common/Editor/HierarchyPalette.cs` + `Common/Editor/HierarchyStyler.cs` | 하이어라키에서 **이름 앞 접두 문자로 줄을 색칠**해 계층을 구분한다 (`!`·`@`·`#` …). 설치 후 `Create > Arca > Hierarchy Palette` 로 팔레트를 하나 만든다 |
 
 **계약(인터페이스)은 마스터에 넣지 않는다.** `Services` 는 *메커니즘*이고, `IOpponent` 같은 계약은
@@ -55,6 +55,9 @@
 
 ## 규칙
 
+- **이 코드는 nullable 참조 형식이 켜져 있다고 전제한다.** `MonoBehaviourExtensions` 의
+  `Object? reference` 처럼 `?` 표기를 쓰므로, `Assets/csc.rsp` 에 `-nullable:enable` 이 없으면
+  **CS8632 경고**가 뜬다. `/unity-project-setup` 3단계가 이 파일을 만든다.
 - **`.meta` 는 마스터에 보관하지 않는다.** 모든 프로젝트가 같은 GUID를 갖게 되어 프로젝트 간
   에셋 교환 시 충돌 원인이 된다. 복사 후 Unity 에디터를 켜서 생성시킨다.
 - 프로젝트가 이 표준을 따르지 않는 경우(기존 폴더 구조가 이미 자리잡은 저장소 등)

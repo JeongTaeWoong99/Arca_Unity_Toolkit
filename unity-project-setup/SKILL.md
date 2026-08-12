@@ -4,7 +4,7 @@ description: 새 유니티 프로젝트의 Claude 초기 세팅. CLAUDE.md 생�
 disable-model-invocation: true
 ---
 
-> 최종 업데이트: 2026-07-18
+> 최종 업데이트: 2026-08-12 (3단계에 `csc.rsp` nullable 활성화 추가)
 
 # 유니티 프로젝트 초기 세팅
 
@@ -35,6 +35,17 @@ disable-model-invocation: true
 
 ### 3. 코드 자산 설치
 
+- **먼저 `Assets/csc.rsp`로 nullable 참조 형식을 켠다.** 파일이 없으면 아래 한 줄로 만든다.
+
+  ```
+  -nullable:enable
+  ```
+
+  이미 있으면 이 행만 더하고 **기존 옵션을 덮어쓰지 않는다.**
+  이걸 켜야 아래에서 복사할 `MonoBehaviourExtensions`의 `Object?`가 **CS8632 경고 없이**
+  컴파일되고, `clean-code-style` 9장(필수 참조 `= null!` + `RequireRef` / 선택 참조 `?`)이 성립한다.
+  (`.rsp`는 Unity가 C# 컴파일러에 넘기는 옵션 파일이다. 저장 후 스크립트 리컴파일이 필요하며,
+  반영이 안 보이면 에디터를 재시작한다)
 - **스크립트 루트**를 1단계 답변으로 결정한다 : 1인 개발 `Assets/Scripts`,
   협업(클라이언트 담당) `Assets/Scripts_Client`.
 - `templates/code/Common/` 내부 구조를 그대로 `<스크립트 루트>/Common/` 아래로 복사한다.
