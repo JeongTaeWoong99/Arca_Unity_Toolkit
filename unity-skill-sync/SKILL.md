@@ -4,7 +4,7 @@ description: 현재 프로젝트의 CLAUDE.md·스킬과 전역 마스터(~/.cla
 disable-model-invocation: true
 ---
 
-> 최종 업데이트: 2026-07-17
+> 최종 업데이트: 2026-08-15 (SKILL.md 단독 → 스킬 폴더 안 모든 md 비교로 확장)
 
 # 스킬 동기화 (프로젝트 ↔ 전역 마스터)
 
@@ -20,7 +20,10 @@ disable-model-invocation: true
 
 ### 1. Diff 수집
 
-- 프로젝트 `.claude/skills/`의 각 SKILL.md를 마스터 `templates/skills/`의 같은 경로 파일과 비교한다.
+- 프로젝트 `.claude/skills/`의 **스킬 폴더 안에 있는 모든 `.md`** 를 마스터 `templates/skills/`의
+  같은 경로 파일과 비교한다. `SKILL.md` 뿐 아니라 **같은 폴더의 상세 문서**(예: `clean-code-style/스타일 상세.md`)도
+  대상이다 — `SKILL.md`만 보면 분리된 상세 문서를 통째로 놓친다.
+  한쪽에만 있는 `.md` 도 차이로 본다.
 - 프로젝트 `CLAUDE.md`를 마스터 `templates/CLAUDE.md.template`과 비교한다
   (placeholder·프로젝트 고유 내용은 차이로 치지 않는다).
 - 한쪽에만 존재하는 스킬도 목록에 포함한다.
