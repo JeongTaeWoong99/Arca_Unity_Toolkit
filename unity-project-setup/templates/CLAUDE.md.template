@@ -30,10 +30,9 @@
 | 경로 | 담당 | 내용 |
 |------|------|------|
 | `Assets/Scripts_Client/` | 클라이언트 | 클라이언트 코드 (스크립트 루트). 1인 개발이면 `Assets/Scripts/` |
-| `Assets/Scripts_Client/Common/Attribute/` | 클라이언트 | 범용 런타임 어트리뷰트 (마스터 `templates/code/` 에서 설치됨) |
-| `Assets/Scripts_Client/Common/Editor/` | 클라이언트 | 범용 에디터 전용 코드 — 드로어·툴 (빌드 제외) |
-| `Assets/Scripts_Client/Common/Service/` | 클라이언트 | 서비스 로케이터 (`Services` · `MonoService`) |
-| `Assets/Scripts_Client/Common/Extensions/` | 클라이언트 | 범용 확장 메서드 (`MonoBehaviourExtensions` 등) |
+| `Assets/Scripts_Client/Common/` | 클라이언트 | **Arca Unity Toolkit의 사본** — 게임을 모르는 범용 코드. **자산 하나 = 폴더 하나**(`service-locator/` · `mono-extensions/` · `center-header/` · `hierarchy-styler/` · `ugui-layout/` · `editor-shared/` · `memory-meter/`). 에디터 전용 파일만 각 자산 안 `Editor/`에 있다 — ⚠️ 펴면 빌드가 깨진다. 여기서 고쳤으면 `/unity-skill-sync`로 되돌린다 |
+| `tasks/` · `tasks/archive/` | 공용 | **할 일의 단일 목록** — 일감 1개 = 파일 1개, `README.md`가 현황 표. 끝나면 `archive/`로 내려간다 (`task-reader` · `task-writer`) |
+| `.claude/Agent/` | 공용 | **작업 로그** — 이미 한 일의 경위·결정·지뢰. `README.md`가 INDEX (`agent-log-writer` · `agent-log-reader`) |
 | `Assets/Scripts_Client/<기능>/Contracts/` | 클라이언트 | 그 기능이 정의한 역할 인터페이스 (계약 전용 최상위 폴더는 두지 않는다) |
 | `Assets/Scenes/` | 공용 | 씬 파일 |
 <!-- IF 서버: Server/, Assets/Scripts/(Network·Protocol 미러) 행 추가 -->
@@ -51,34 +50,44 @@
 - `.claude/settings.local.json`은 개인 설정이라 커밋하지 않는다(`.gitignore` 처리됨).
 - 코드는 한글 주석을 사용한다.
 - CLAUDE.md·스킬 문서를 수정하면 문서 상단의 `최종 업데이트` 날짜를 그날 날짜로 갱신한다.
+- **`Common/`과 `.claude/skills/`는 [Arca Unity Toolkit](https://github.com/JeongTaeWoong99/Arca_Unity_Toolkit)의 사본이다.**
+  여러 프로젝트가 함께 쓰는 물건이라, 여기서 고쳤으면 `/unity-skill-sync`로 마스터에 되돌린다.
+  범용 코드 주석에 **이 프로젝트의 클래스 이름을 남기지 않는다**(`XxxManager` 같은 자리 표시자를 쓴다).
 
 ---
 
 ## Skills 참조
 
-스킬은 항상 적용하는 게 아니라, **작업 내용에 따라 필요한 경우에만** 참고한다.
+**스킬은 항상 적용하는 게 아니라, 아래 "언제" 칸에 해당할 때만 연다.**
+이 표는 무엇을 담았는지가 아니라 **언제 발동하는지**의 명세다.
 작업하는 폴더에 맞춰 해당 그룹과 **공용** 스킬을 함께 본다.
 (클라이언트 작업 = 공용 + 클라이언트 / 서버 작업 = 공용 + 서버)
 
-### 공용 (`common/`) — 모든 작업
+### 공용 (`common/`)
 
-| 스킬 | 경로 | 내용 |
-|------|------|------|
-| `commit-convention` | [`.claude/skills/common/commit-convention/SKILL.md`](.claude/skills/common/commit-convention/SKILL.md) | Git 커밋 메시지 규칙 |
+| 스킬 | 언제 | 무엇을 |
+|------|------|--------|
+| [`commit-convention`](.claude/skills/common/commit-convention/SKILL.md) | 커밋할 때 | Git 커밋 메시지 규칙 |
+| [`agent-log-writer`](.claude/skills/common/agent-log-writer/SKILL.md) | **코드 작업 종료 후 — 조건 없이 항상** | `.claude/Agent/`에 로그 기록 |
+| [`agent-log-reader`](.claude/skills/common/agent-log-reader/SKILL.md) | 기존 결정을 뒤집을 때 · 원인 불명 버그 · "예전에 왜?" 의문이 생겼을 때 · 미완 작업을 이어받을 때 — **일반 작업엔 열지 않는다** | `.claude/Agent/`에서 과거 경위 확인 |
+| [`task-reader`](.claude/skills/common/task-reader/SKILL.md) | 사용자가 할 일을 묻거나 `T-0XX`를 언급할 때 · 일감 상태 갱신 전 | `tasks/` 현황 확인 |
+| [`task-writer`](.claude/skills/common/task-writer/SKILL.md) | 할 일이 새로 생겼을 때 · 작업을 시작/완료했을 때 | `tasks/` 등록·갱신 |
 
-### 클라이언트 (`client/`) — `Assets/Scripts_Client` 작업 시
+### 클라이언트 (`client/`) — 클라이언트 코드 작업 시
 
-| 스킬 | 경로 | 내용 |
-|------|------|------|
-| `clean-code-style` | [`.claude/skills/client/clean-code-style/SKILL.md`](.claude/skills/client/clean-code-style/SKILL.md) | Unity/C# 클린 코드 스타일 규칙 |
-| `feature-design` | [`.claude/skills/client/feature-design/SKILL.md`](.claude/skills/client/feature-design/SKILL.md) | OOP·SOLID·디자인 패턴 기반 기능 설계 |
-| `optimization` | [`.claude/skills/client/optimization/SKILL.md`](.claude/skills/client/optimization/SKILL.md) | 성능 최적화 판단 및 적용 가이드 |
-| `unity-handoff` | [`.claude/skills/client/unity-handoff/SKILL.md`](.claude/skills/client/unity-handoff/SKILL.md) | 유니티 에디터 작업 핸드오프 프롬프트 생성 |
+| 스킬 | 언제 | 무엇을 |
+|------|------|--------|
+| [`clean-code-style`](.claude/skills/client/clean-code-style/SKILL.md) | C# 코드를 쓰거나 리뷰할 때 | 명명·포맷·주석 스타일 규칙 |
+| [`feature-design`](.claude/skills/client/feature-design/SKILL.md) | 새 기능·클래스·시스템을 **설계**할 때 | OOP·SOLID·디자인 패턴 |
+| [`ugui-mvp`](.claude/skills/client/ugui-mvp/SKILL.md) | 화면·위젯을 **새로 만들** 때 · 이름/부착 위치/폴더를 정할 때 | MVP 역할 분담 · 이름 규칙 · Presenter 뼈대 |
+| [`ugui-layout`](.claude/skills/client/ugui-layout/SKILL.md) | 배치를 짜거나, **배치가 의도대로 안 나올 때** | Canvas·LayoutGroup 함정과 정석 구조 |
+| [`optimization`](.claude/skills/client/optimization/SKILL.md) | 성능 문제가 **실제로 관측됐을 때** | 최적화 판단·적용 가이드 |
+| [`unity-handoff`](.claude/skills/client/unity-handoff/SKILL.md) | 답변 후 에디터 수작업이 남을 때 | 유니티 어시스턴트용 프롬프트 생성 |
 
 ### 서버 (`server/`) — 서버 코드 작업 시
 
-| 스킬 | 경로 | 내용 |
-|------|------|------|
+| 스킬 | 언제 | 무엇을 |
+|------|------|--------|
 | (없음) | — | 필요 시 서버 담당이 추가 |
 
 <!-- IF 서버 없음: 서버 섹션 전체 삭제 -->
