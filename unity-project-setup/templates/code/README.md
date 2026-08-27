@@ -1,6 +1,6 @@
 # 범용 코드 자산 (마스터 원본)
 
-> 최종 업데이트: 2026-08-26 (자산별 폴더 구조로 개편 · 자산 3종 추가 · 자산 문서 동반 복사)
+> 최종 업데이트: 2026-08-28 (`scene-dirty-tracer` 추가)
 
 어떤 유니티 프로젝트에도 그대로 복사해 쓰는 범용 C# 코드의 단일 진실.
 `/unity-project-setup` 이 프로젝트 유형에 맞는 위치로 복사한다.
@@ -37,8 +37,10 @@
 │   └── Editor/         FlexibleGridLayoutGroupEditor.cs
 ├── editor-shared/
 │   └── Editor/         EditorGit.cs · EditorIcons.cs · ProjectPreferences.cs
-└── memory-meter/
-    └── Editor/         EditorMemoryMeter.cs · EditorMemoryToolbarButton.cs
+├── memory-meter/
+│   └── Editor/         EditorMemoryMeter.cs · EditorMemoryToolbarButton.cs
+└── scene-dirty-tracer/
+    └── Editor/         SceneDirtyTracer.cs · SceneDirtyTracerSettings.cs
 ```
 
 - 자산 폴더명은 **영문 소문자 kebab-case**. `Editor`만 Unity 예약어라 PascalCase 그대로다.
@@ -74,6 +76,7 @@
 | **uGUI Layout** | `ugui-layout/` | `FlexibleGridLayoutGroup`(폭에 맞춰 셀 역산) · `SquareLayoutElement`("높이만큼 정사각형"). 함정 전반은 `skills/client/ugui-layout` |
 | **EditorShared** | `editor-shared/` | 에디터 툴 공용 — git 실행(`EditorGit`) · 내장 아이콘 캐시(`EditorIcons`) · 환경 설정 뿌리(`ProjectPreferences`) |
 | **MemoryMeter** | `memory-meter/` | 에디터 메모리 사용량을 상단 툴바에 1초마다 표시 + 클릭 시 정리. 용어·함정은 폴더의 규칙 문서에 |
+| **SceneDirtyTracer** | `scene-dirty-tracer/` | 씬을 만진 적 없는데 `*`가 붙고 저장해도 diff가 0일 때, 더티를 만든 쪽을 추적. **기본 꺼짐** — 쓰는 법은 폴더의 규칙 문서에 |
 
 **계약(인터페이스)은 마스터에 넣지 않는다.** `Services`는 *메커니즘*이고, `IOpponent` 같은 계약은
 프로젝트마다 다른 *도메인*이다. 계약은 각 프로젝트에서 **그것을 정의한 기능 폴더 안 `Contracts/`** 에
