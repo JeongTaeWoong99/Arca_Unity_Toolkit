@@ -1,6 +1,6 @@
 # Arca_Unity_Toolkit
 
-> 최종 업데이트: 2026-08-26 (자산별 Common 구조 · 스킬 6종 추가 · 공동 소유 안전장치)
+> 최종 업데이트: 2026-09-19 (자산별 Common 구조 · 스킬 6종 추가 · 공동 소유 안전장치 · 자동 생성물 제외)
 
 Claude Code로 **유니티 프로젝트의 표준 환경을 세팅하고 키워 나가는 개인 툴킷**.
 
@@ -49,6 +49,29 @@ Common/
 | `common/` | `commit-convention` · `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` |
 | `client/` | `clean-code-style` · `feature-design` · `ugui-mvp` · `ugui-layout` · `optimization` · `unity-handoff` |
 | `server/` | (없음) |
+
+---
+
+## 추적하지 않는 것 — Claude Code 자동 생성물
+
+이 저장소는 `~/.claude/skills` **디렉터리 자체다.** 그래서 Claude Code가 자기 작업 폴더를
+저장소 안에 만드는 일이 생긴다. 이런 것은 **툴킷의 자산이 아니다** — 내가 만들지도, 고치지도,
+프로젝트에 심지도 않는다. 지워도 Claude Code가 다시 만든다.
+
+| 경로 | 무엇 | 왜 제외 |
+|------|------|---------|
+| `synced/` | 계정에 등록된 스킬이 내려받아지는 착지점 (`docx`·`pptx`·`xlsx`·`pdf` 등 Anthropic 제공 스킬) | Anthropic 소유 · 경로에 계정 UUID · 자동 재생성 · 4MB 대부분이 OOXML 스키마 |
+
+**올릴 때도 받을 때도 제외한다.**
+
+- **git** — `.gitignore`가 막는다. 비슷한 폴더가 새로 생기면 거기에 한 줄 추가한다.
+- **`/unity-project-setup`** — 심기 대상은 `unity-project-setup/templates/` 뿐이다.
+  저장소 최상위의 다른 폴더는 프로젝트로 복사하지 않는다.
+- **`/unity-skill-sync`** — 비교 대상은 `templates/` 아래로 한정된다.
+  자동 생성물은 diff에도, push에도, pull에도 넣지 않는다.
+
+> 판별 기준은 하나다 — **내가 고칠 수 있고, 고친 것이 남는가?**
+> 다음 동기화에 덮이거나 저절로 다시 생기는 것이면 툴킷의 자산이 아니다.
 
 ---
 
