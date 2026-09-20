@@ -72,6 +72,7 @@
 | [`agent-log-reader`](.claude/skills/common/agent-log-reader/SKILL.md) | 기존 결정을 뒤집을 때 · 원인 불명 버그 · "예전에 왜?" 의문이 생겼을 때 · 미완 작업을 이어받을 때 — **일반 작업엔 열지 않는다** | `.claude/Agent/`에서 과거 경위 확인 |
 | [`task-reader`](.claude/skills/common/task-reader/SKILL.md) | 사용자가 할 일을 묻거나 `T-0XX`를 언급할 때 · 일감 상태 갱신 전 | `tasks/` 현황 확인 |
 | [`task-writer`](.claude/skills/common/task-writer/SKILL.md) | 할 일이 새로 생겼을 때 · 작업을 시작/완료했을 때 | `tasks/` 등록·갱신 |
+| [`github-issue-writer`](.claude/skills/common/github-issue-writer/SKILL.md) | **상대 영역**(서버·클라·기획 등)에게 요청·확인·공유할 일이 생겼을 때 · 버그를 넘길 때 — 내가 내 영역에서 처리하는 일은 해당 없음(`task-writer`) · 1인 프로젝트는 해당 없음 | 이슈 제목 규칙 · assignee/label(필수) · 본문 뼈대 |
 
 ### 클라이언트 (`client/`) — 클라이언트 코드 작업 시
 
