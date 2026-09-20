@@ -1,6 +1,6 @@
 # 스킬 마스터 원본
 
-> 최종 업데이트: 2026-09-20 (`github-issue-writer` 추가)
+> 최종 업데이트: 2026-09-20 (`github-issue-writer` 추가 · `unity-handoff` → `unity-editor-ops` 개편)
 
 `/unity-project-setup`이 새 프로젝트의 `.claude/skills/`로 복사하는 스킬의 단일 진실.
 프로젝트에서 다듬은 **범용 개선**은 `/unity-skill-sync`로 여기 되돌린다.
@@ -38,7 +38,7 @@
 
 | 그룹 | 스킬 | 원작 |
 |------|------|------|
-| `client/` | `clean-code-style` · `feature-design` · `optimization` · `unity-handoff` | 본인 |
+| `client/` | `clean-code-style` · `feature-design` · `optimization` · `unity-editor-ops` | 본인 |
 | `client/` | `ugui-layout` · `ugui-mvp` | 본인 (DesktopWindow_Control에서 승격, 2026-08-26) |
 | `common/` | `commit-convention` | 본인 |
 | `common/` | `github-issue-writer` | 본인 (DesktopWindow_Control에서 승격, 2026-09-20) |

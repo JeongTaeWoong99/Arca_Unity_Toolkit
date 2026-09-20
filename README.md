@@ -1,6 +1,6 @@
 # Arca_Unity_Toolkit
 
-> 최종 업데이트: 2026-09-19 (자산별 Common 구조 · 스킬 6종 추가 · 공동 소유 안전장치 · 자동 생성물 제외)
+> 최종 업데이트: 2026-09-20 (`unity-handoff` → `unity-editor-ops` 개편 · `github-issue-writer` 반영 · `unity-cli` 추적 제외)
 
 Claude Code로 **유니티 프로젝트의 표준 환경을 세팅하고 키워 나가는 개인 툴킷**.
 
@@ -42,12 +42,12 @@ Common/
 
 협업(클라이언트 담당) `Assets/Scripts_Client/`. 그 아래 `Common/` 구조는 두 경우가 동일하다.
 
-### 스킬 11종
+### 스킬 12종
 
 | 그룹 | 스킬 |
 |------|------|
-| `common/` | `commit-convention` · `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` |
-| `client/` | `clean-code-style` · `feature-design` · `ugui-mvp` · `ugui-layout` · `optimization` · `unity-handoff` |
+| `common/` | `commit-convention` · `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` · `github-issue-writer` |
+| `client/` | `clean-code-style` · `feature-design` · `ugui-mvp` · `ugui-layout` · `optimization` · `unity-editor-ops` |
 | `server/` | (없음) |
 
 ---
@@ -61,6 +61,7 @@ Common/
 | 경로 | 무엇 | 왜 제외 |
 |------|------|---------|
 | `synced/` | 계정에 등록된 스킬이 내려받아지는 착지점 (`docx`·`pptx`·`xlsx`·`pdf` 등 Anthropic 제공 스킬) | Anthropic 소유 · 경로에 계정 UUID · 자동 재생성 · 4MB 대부분이 OOXML 스키마 |
+| `unity-cli/` | `unity skill install claude-code`가 심는 Unity 공식 CLI 스킬 | Unity 소유 · CLI 버전에 딸림 · 같은 명령으로 언제든 재생성 |
 
 **올릴 때도 받을 때도 제외한다.**
 

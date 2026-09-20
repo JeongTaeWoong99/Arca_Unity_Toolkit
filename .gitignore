@@ -7,3 +7,11 @@
 # 계정에 등록된 스킬이 내려받아지는 착지점.
 # Anthropic 소유 + 계정 UUID 경로 + 지우면 자동 재생성 → 추적 가치가 없다.
 synced/
+
+# `unity skill install claude-code`가 심는 Unity 공식 스킬.
+# Unity 소유 + CLI 버전에 딸림 + 같은 명령으로 언제든 재생성 → 마스터에 섞지 않는다.
+unity-cli/
+
+# 스킬을 지울 때 Claude Code가 옮겨 두는 휴지통 (타임스탬프 폴더가 쌓인다).
+# 지운 물건의 사본일 뿐이고, 한 번에 수백 파일이 딸려 들어온다.
+.trash/
