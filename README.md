@@ -23,7 +23,7 @@ Claude Code로 **유니티 프로젝트의 표준 환경을 세팅하고 키워 
 | `unity-project-setup/templates/code/` | 범용 C# 코드 | `Common/` — **자산 하나 = 폴더 하나** ([설치 규칙](unity-project-setup/templates/code/README.md)) |
 | `unity-skill-sync/` | 슬래시 스킬 | `/unity-skill-sync` — 프로젝트 ↔ 마스터 diff 후 선택 반영 |
 
-### 범용 코드 자산 7종
+### 범용 코드 자산 8종
 
 ```
 Common/
@@ -33,7 +33,8 @@ Common/
 ├── hierarchy-styler/   이름 접두 문자(!·@·#)로 하이어라키 줄 색칠
 ├── ugui-layout/        FlexibleGridLayoutGroup · SquareLayoutElement
 ├── editor-shared/      EditorGit · EditorIcons · ProjectPreferences
-└── memory-meter/       상단 툴바 메모리 표시 + 정리
+├── memory-meter/       상단 툴바 메모리 표시 + 정리
+└── object-pool/        PrefabPool · PooledObject · UIRowList — 풀링 · 대여 토큰
 ```
 
 에디터 전용 파일은 각 자산 안 `Editor/`에 있다 — ⚠️ **펴면 빌드가 깨진다.**
@@ -42,12 +43,12 @@ Common/
 
 협업(클라이언트 담당) `Assets/Scripts_Client/`. 그 아래 `Common/` 구조는 두 경우가 동일하다.
 
-### 스킬 12종
+### 스킬 15종
 
 | 그룹 | 스킬 |
 |------|------|
 | `common/` | `commit-convention` · `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` · `github-issue-writer` |
-| `client/` | `clean-code-style` · `feature-design` · `ugui-mvp` · `ugui-layout` · `optimization` · `unity-editor-ops` |
+| `client/` | `clean-code-style` · `feature-design` · `ugui-mvp` · `ugui-layout` · `unitask` · `dotween` · `object-pool` · `optimization` · `unity-editor-ops` |
 | `server/` | (없음) |
 
 ---

@@ -40,6 +40,7 @@
 |------|------|------|
 | `client/` | `clean-code-style` · `feature-design` · `optimization` · `unity-editor-ops` | 본인 |
 | `client/` | `ugui-layout` · `ugui-mvp` | 본인 (DesktopWindow_Control에서 승격, 2026-08-26) |
+| `client/` | `unitask` · `dotween` · `object-pool` | 본인 (DesktopWindow_Control에서 승격, 2026-10-08) |
 | `common/` | `commit-convention` | 본인 |
 | `common/` | `github-issue-writer` | 본인 (DesktopWindow_Control에서 승격, 2026-09-20) |
 | `common/` | `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` | **서버 담당 동료** (DesktopWindow_Control, 2026-08-26 범용화 후 승격) |

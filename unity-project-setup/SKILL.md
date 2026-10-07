@@ -4,7 +4,7 @@ description: 새 유니티 프로젝트의 Claude 초기 세팅. CLAUDE.md 생�
 disable-model-invocation: true
 ---
 
-> 최종 업데이트: 2026-08-26 (자산별 Common 구조 · 자산 문서 동반 복사 · 팔레트 생성 안내)
+> 최종 업데이트: 2026-10-08 (`object-pool` 자산 추가 · UniTask·DOTween 표준 패키지 설치 안내)
 
 # 유니티 프로젝트 초기 세팅
 
@@ -25,6 +25,37 @@ disable-model-invocation: true
   1. 프로젝트 한 줄 개요 (어떤 게임/앱인지)
   2. 1인 개발인지 협업인지
   3. 서버(네트워크) 파트가 있는지
+
+### 1-1. 표준 패키지 — UniTask · DOTween (없으면 설치하라고 띄운다)
+
+**UniTask와 DOTween은 표준 패키지다.** 코루틴 대신 이 둘로 짠다는 규칙([`unitask`](templates/skills/client/unitask/SKILL.md) ·
+[`dotween`](templates/skills/client/dotween/SKILL.md))이 모든 프로젝트에 깔린다. 설치 여부를 보고, 빠진 것이 있으면
+**아래 안내를 그대로 사용자에게 띄워 설치를 요청한다.** 설치는 사용자가 한다(Asset Store 로그인이 필요하다).
+
+| 확인 | 설치된 것으로 보는 근거 |
+|------|------------------------|
+| UniTask | `Packages/manifest.json`에 `com.cysharp.unitask` |
+| DOTween | `Assets/Plugins/Demigiant/DOTween/` + `Assets/Resources/DOTweenSettings.asset` |
+| 연동 심볼 | `ProjectSettings/ProjectSettings.asset`의 Scripting Define Symbols에 `UNITASK_DOTWEEN_SUPPORT` |
+
+```
+📦 표준 패키지를 설치해 주세요 — UniTask · DOTween
+
+1) UniTask
+   Package Manager → + → Add package from git URL →
+   https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
+
+2) DOTween (무료판)
+   https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676
+   → Add to My Assets → Package Manager > My Assets에서 임포트
+   → Tools > Demigiant > DOTween Utility Panel → Setup DOTween → Apply
+     (EPO 등 외부 에셋 모듈은 그 에셋이 있을 때만 켠다 — 없으면 컴파일 오류)
+
+3) Player Settings > Scripting Define Symbols에 UNITASK_DOTWEEN_SUPPORT 추가
+```
+
+- 설치를 기다리지 않고 다음 단계로 넘어가도 된다 — 스킬·문서 복사는 패키지와 무관하다.
+  **6. 마무리 보고에 설치 여부를 다시 적는다.**
 
 ### 2. 스킬 복사
 
@@ -61,7 +92,7 @@ disable-model-invocation: true
   Common/
   ├── service-locator/    ├── center-header/        ├── ugui-layout/
   ├── mono-extensions/    ├── hierarchy-styler/     ├── editor-shared/
-  └── memory-meter/
+  ├── memory-meter/       └── object-pool/
   ```
 
   ⚠️ **각 자산 폴더 안의 `Editor/` 하위 폴더를 평평하게 펴지 않는다.** Unity는 정확히
@@ -101,7 +132,7 @@ disable-model-invocation: true
   `.gitignore`가 적용되지 않으므로**, 추적 중이면 `git rm --cached`로 인덱스에서 뺀다(파일은 유지됨).
 - `tasks/`·`.claude/Agent/`를 쓸 것이면 각각 `README.md`(INDEX 표)를 빈 상태로 만들어 둔다 —
   `task-writer`·`agent-log-writer`가 그 파일을 전제로 동작한다.
-- 생성/복사된 파일 목록과 CLAUDE.md 요약, 그리고 **위 "설치 후 손이 필요한 것"의 남은 수작업**을 함께 보고한다.
+- 생성/복사된 파일 목록과 CLAUDE.md 요약, 그리고 **위 "설치 후 손이 필요한 것"의 남은 수작업과 1-1 표준 패키지 설치 여부**를 함께 보고한다.
 - 세팅 중 마스터 템플릿을 개선할 점을 발견했으면 `/unity-skill-sync`를 제안한다.
 
 ---
