@@ -1,6 +1,6 @@
 # Arca_Unity_Toolkit
 
-> 최종 업데이트: 2026-09-20 (`unity-handoff` → `unity-editor-ops` 개편 · `github-issue-writer` 반영 · `unity-cli` 추적 제외)
+> 최종 업데이트: 2026-10-11 (`ugui-layout`에 `ContentFloorLayoutElement`) · 2026-09-20 (`unity-handoff` → `unity-editor-ops` 개편 · `github-issue-writer` 반영 · `unity-cli` 추적 제외)
 
 Claude Code로 **유니티 프로젝트의 표준 환경을 세팅하고 키워 나가는 개인 툴킷**.
 
@@ -31,7 +31,7 @@ Common/
 ├── mono-extensions/    RequireRef — 필수 인스펙터 참조 fail-fast 검증
 ├── center-header/      인스펙터 섹션 가운데 정렬 헤더
 ├── hierarchy-styler/   이름 접두 문자(!·@·#)로 하이어라키 줄 색칠
-├── ugui-layout/        FlexibleGridLayoutGroup · SquareLayoutElement
+├── ugui-layout/        FlexibleGridLayoutGroup · SquareLayoutElement · ContentFloorLayoutElement
 ├── editor-shared/      EditorGit · EditorIcons · ProjectPreferences
 ├── memory-meter/       상단 툴바 메모리 표시 + 정리
 └── object-pool/        PrefabPool · PooledObject · UIRowList — 풀링 · 대여 토큰
