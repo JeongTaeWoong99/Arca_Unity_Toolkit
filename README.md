@@ -23,7 +23,7 @@ Claude Code로 **유니티 프로젝트의 표준 환경을 세팅하고 키워 
 | `unity-project-setup/templates/code/` | 범용 C# 코드 | `Common/` — **자산 하나 = 폴더 하나** ([설치 규칙](unity-project-setup/templates/code/README.md)) |
 | `unity-skill-sync/` | 슬래시 스킬 | `/unity-skill-sync` — 프로젝트 ↔ 마스터 diff 후 선택 반영 |
 
-### 범용 코드 자산 8종
+### 범용 코드 자산 9종
 
 ```
 Common/
@@ -34,7 +34,8 @@ Common/
 ├── ugui-layout/        FlexibleGridLayoutGroup · SquareLayoutElement · ContentFloorLayoutElement
 ├── editor-shared/      EditorGit · EditorIcons · ProjectPreferences
 ├── memory-meter/       상단 툴바 메모리 표시 + 정리
-└── object-pool/        PrefabPool · PooledObject · UIRowList — 풀링 · 대여 토큰
+├── object-pool/        PrefabPool · PooledObject · UIRowList — 풀링 · 대여 토큰
+└── sound/              SoundManager · SoundChannel · SoundCatalog — BGM·효과음·UI 채널 · 음량 저장
 ```
 
 에디터 전용 파일은 각 자산 안 `Editor/`에 있다 — ⚠️ **펴면 빌드가 깨진다.**

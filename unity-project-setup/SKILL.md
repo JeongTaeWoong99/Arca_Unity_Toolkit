@@ -4,7 +4,7 @@ description: 새 유니티 프로젝트의 Claude 초기 세팅. CLAUDE.md 생�
 disable-model-invocation: true
 ---
 
-> 최종 업데이트: 2026-10-08 (`object-pool` 자산 추가 · UniTask·DOTween 표준 패키지 설치 안내)
+> 최종 업데이트: 2026-10-31 (`sound` 자산 추가) · 2026-10-08 (`object-pool` 자산 추가 · UniTask·DOTween 표준 패키지 설치 안내)
 
 # 유니티 프로젝트 초기 세팅
 
@@ -92,7 +92,7 @@ disable-model-invocation: true
   Common/
   ├── service-locator/    ├── center-header/        ├── ugui-layout/
   ├── mono-extensions/    ├── hierarchy-styler/     ├── editor-shared/
-  ├── memory-meter/       └── object-pool/
+  ├── memory-meter/       ├── object-pool/          └── sound/
   ```
 
   ⚠️ **각 자산 폴더 안의 `Editor/` 하위 폴더를 평평하게 펴지 않는다.** Unity는 정확히
