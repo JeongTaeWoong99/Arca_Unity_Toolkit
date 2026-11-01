@@ -1,6 +1,6 @@
 # Arca_Unity_Toolkit
 
-> 최종 업데이트: 2026-10-11 (`ugui-layout`에 `ContentFloorLayoutElement`) · 2026-09-20 (`unity-handoff` → `unity-editor-ops` 개편 · `github-issue-writer` 반영 · `unity-cli` 추적 제외)
+> 최종 업데이트: 2026-11-02 (`unity-ai-assets` 추가) · 2026-10-11 (`ugui-layout`에 `ContentFloorLayoutElement`) · 2026-09-20 (`unity-handoff` → `unity-editor-ops` 개편 · `github-issue-writer` 반영 · `unity-cli` 추적 제외)
 
 Claude Code로 **유니티 프로젝트의 표준 환경을 세팅하고 키워 나가는 개인 툴킷**.
 
@@ -48,7 +48,7 @@ Common/
 
 | 그룹 | 스킬 |
 |------|------|
-| `common/` | `commit-convention` · `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` · `github-issue-writer` |
+| `common/` | `commit-convention` · `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` · `github-issue-writer` · `unity-ai-assets` |
 | `client/` | `clean-code-style` · `feature-design` · `ugui-mvp` · `ugui-layout` · `unitask` · `dotween` · `object-pool` · `optimization` · `unity-editor-ops` |
 | `server/` | (없음) |
 

@@ -1,6 +1,6 @@
 # 스킬 마스터 원본
 
-> 최종 업데이트: 2026-09-20 (`github-issue-writer` 추가 · `unity-handoff` → `unity-editor-ops` 개편)
+> 최종 업데이트: 2026-11-02 (`unity-ai-assets` 추가) · 2026-09-20 (`github-issue-writer` 추가 · `unity-handoff` → `unity-editor-ops` 개편)
 
 `/unity-project-setup`이 새 프로젝트의 `.claude/skills/`로 복사하는 스킬의 단일 진실.
 프로젝트에서 다듬은 **범용 개선**은 `/unity-skill-sync`로 여기 되돌린다.
@@ -43,6 +43,7 @@
 | `client/` | `unitask` · `dotween` · `object-pool` | 본인 (DesktopWindow_Control에서 승격, 2026-10-08) |
 | `common/` | `commit-convention` | 본인 |
 | `common/` | `github-issue-writer` | 본인 (DesktopWindow_Control에서 승격, 2026-09-20) |
+| `common/` | `unity-ai-assets` | 본인 (DesktopWindow_Control에서 승격, 2026-11-02) |
 | `common/` | `agent-log-writer` · `agent-log-reader` · `task-writer` · `task-reader` | **서버 담당 동료** (DesktopWindow_Control, 2026-08-26 범용화 후 승격) |
 | `server/` | (없음) | — |
 
